@@ -1,6 +1,8 @@
 package dk.sdu.cbse.common.data;
-import java.util.Objects;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class GameData {
     private int displayWidth = 800;
     private int displayHeight = 800;

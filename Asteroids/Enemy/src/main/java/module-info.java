@@ -11,4 +11,6 @@ module Enemy {
     provides IGamePluginService with EnemyPlugin;
     provides IEntityProcessingService with EnemyProcessing;
     uses IMissile;
+    requires spring.context;
+    requires spring.beans;
 }

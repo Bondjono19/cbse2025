@@ -5,8 +5,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import dk.sdu.cbse.common.data.GameData;
+import org.springframework.stereotype.Component;
 
+@Component
 public class World {
     private final Map<String, Entity> entityMap = new ConcurrentHashMap<>();
     private int points;

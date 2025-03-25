@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.ServiceLoader;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.GameKeys;
@@ -28,12 +31,22 @@ import javafx.scene.text.Text;
  * Hello world!
  */
 public class Main extends Application{
+    @Autowired
+    private static GameData gameData;
+    @Autowired
+    private static World world;
 
-    private final GameData gameData = new GameData();
-    private final World world = new World();
     private final Map<Entity,Polygon> polygons = new ConcurrentHashMap<>();
+
     private final Pane gameWindow = new Pane();
+
+
     public static void main(String[] args) {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.scan("dk.sdu.cbse");
+        context.refresh();
+        gameData = context.getBean(GameData.class);
+        world = context.getBean(World.class);
         launch(Main.class);
     }
 

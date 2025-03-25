@@ -8,5 +8,7 @@ module Core {
     uses IGamePluginService;
     uses IEntityProcessingService;
     uses IPostEntityProcessingService;
+    requires spring.context;
+    requires spring.beans;
     opens dk.sdu.cbse.main to javafx.graphics;
 }

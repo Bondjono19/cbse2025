@@ -1,9 +1,12 @@
 package dk.sdu.cbse.enemy;
 
+import org.springframework.stereotype.Component;
+
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.ShipEntity;
 import dk.sdu.cbse.common.data.World;
 
+@Component
 public class Enemy extends ShipEntity{
     Enemy(){
         this.pointValue = 1;
