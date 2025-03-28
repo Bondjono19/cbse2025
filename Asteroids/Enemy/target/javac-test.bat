@@ -1,1 +1,0 @@
-cmd.exe /X /C ""C:\Program Files\Java\jdk-21\bin\javac.exe" @C:/Users/Marius-PC/Desktop/cbse2025/cbse2025/Asteroids/Enemy/target/org.codehaus.plexus.compiler.javac.JavacCompiler7061703492959833478arguments"
