@@ -1,8 +1,11 @@
 package dk.sdu.cbse.main;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import dk.sdu.cbse.common.data.Entity;
@@ -14,6 +17,12 @@ import dk.sdu.cbse.common.services.IGamePluginService;
 import dk.sdu.cbse.common.services.IPostEntityProcessingService;
 
 import static java.util.stream.Collectors.toList;
+
+import java.lang.module.Configuration;
+import java.lang.module.ModuleFinder;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
@@ -33,6 +42,7 @@ public class Main extends Application{
     private final World world = new World();
     private final Map<Entity,Polygon> polygons = new ConcurrentHashMap<>();
     private final Pane gameWindow = new Pane();
+    private ModuleLayer layer;
     public static void main(String[] args) {
         launch(Main.class);
     }
@@ -79,6 +89,7 @@ public class Main extends Application{
             }
         });
 
+        initModuleLayer();
 
         //find all game plugins via the ServiceLoader class
         for (IGamePluginService plugin : getPluginServices()){
@@ -94,7 +105,6 @@ public class Main extends Application{
         window.setScene(scene);
         window.setTitle("Marius Asteroids Game");
         window.show();
-
     }
 
     private void render(){
@@ -116,6 +126,7 @@ public class Main extends Application{
     //call process on all implementations of 'IEntityProcessingService & IPostEntityProcessingService'
     private void update(){
         for (IEntityProcessingService entityProcessingService : getEntityProcessingServices()){
+            
             entityProcessingService.process(gameData, world);
         }
         for (IPostEntityProcessingService postEntityProcessingService : getPostEntityProcessingServices()){
@@ -158,14 +169,36 @@ public class Main extends Application{
 
     //Load all implementations of IGamePluginService
     private Collection<? extends IGamePluginService> getPluginServices() {
-        return ServiceLoader.load(IGamePluginService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+
+        List<IGamePluginService> allServices = new ArrayList<>();
+
+        ServiceLoader.load(IGamePluginService.class).forEach(allServices::add);
+
+        ServiceLoader.load(layer,IGamePluginService.class).forEach(allServices::add);
+
+        return allServices;
     }
     //Load all implementations of IEntityProcessingService
     private Collection<? extends IEntityProcessingService> getEntityProcessingServices() {
-        return ServiceLoader.load(IEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+
+        List<IEntityProcessingService> allServices = new ArrayList<>();
+
+        ServiceLoader.load(IEntityProcessingService.class).forEach(allServices::add);
+
+        ServiceLoader.load(layer,IEntityProcessingService.class).forEach(allServices::add);
+
+        return allServices;
     }
     //Load all implementations of IPostEntityProcessingService
     private Collection<? extends IPostEntityProcessingService> getPostEntityProcessingServices() {
         return ServiceLoader.load(IPostEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+    }
+
+    //Load Enemy module ino new module layer to resolve split package issue
+    private void initModuleLayer(){
+        var finder = ModuleFinder.of(Paths.get("plugins/"));
+        var parent = ModuleLayer.boot();
+        var conf = parent.configuration().resolve(finder, ModuleFinder.of(), Set.of("Enemy"));
+        this.layer = parent.defineModulesWithOneLoader(conf, ClassLoader.getSystemClassLoader());
     }
 }
