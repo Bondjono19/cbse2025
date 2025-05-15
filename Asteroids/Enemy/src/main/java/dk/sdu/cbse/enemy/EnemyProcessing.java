@@ -2,6 +2,9 @@ package dk.sdu.cbse.enemy;
 
 import java.util.ServiceLoader;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
@@ -11,7 +14,25 @@ import dk.sdu.cbse.shooting.Missile;
 
 import static java.util.stream.Collectors.toList;
 
+import java.util.List;
+import java.util.Optional;
+
+@Component
 public class EnemyProcessing implements IEntityProcessingService{
+
+    
+    private List<IMissile> missileImpl;
+    Optional<IMissile> firstMissileImpl;
+
+    @Autowired
+    public EnemyProcessing(List<IMissile> missileImpl){
+        this.missileImpl = missileImpl;
+        firstMissileImpl = missileImpl.stream().findFirst();
+    }
+
+    public EnemyProcessing(){
+
+    }
 
     @Override
     public void process(GameData gameData, World world) {
@@ -32,9 +53,9 @@ public class EnemyProcessing implements IEntityProcessingService{
                 e.setRotation(e.getRotation()-3);
             }
             if(dir<0.05){
-                ServiceLoader.load(IMissile.class).stream().map(ServiceLoader.Provider::get).collect(toList()).stream().findFirst().ifPresent(
-                        spi -> {world.addEntity(spi.createMissile(e,Enemy.class));}
-                );
+                firstMissileImpl.ifPresent(gun -> {
+                    world.addEntity(gun.createMissile(e,Enemy.class));
+                });
             }
             double[] coords = move(1,e.getRotation());
             e.setX(e.getX() +coords[0]);

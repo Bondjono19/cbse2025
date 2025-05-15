@@ -1,5 +1,7 @@
 package dk.sdu.cbse.enemy;
 
+import org.springframework.stereotype.Component;
+
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
@@ -8,7 +10,10 @@ import dk.sdu.cbse.common.services.IGamePluginService;
 /**
  * Hello world!
  */
+@Component
 public class EnemyPlugin implements IGamePluginService{
+
+    public EnemyPlugin(){}
 
     @Override
     public void start(GameData gameData, World world) {

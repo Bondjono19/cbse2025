@@ -12,6 +12,7 @@ module Enemy {
     provides IEntityProcessingService with EnemyProcessing;
     uses IMissile;
     opens dk.sdu.cbse.enemy to spring.core;
+    exports dk.sdu.cbse.enemy;
     requires spring.context;
     requires spring.beans;
 }

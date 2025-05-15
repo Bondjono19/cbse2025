@@ -1,7 +1,7 @@
 package dk.sdu.cbse.player;
 
-
-import java.util.ServiceLoader;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
@@ -10,10 +10,25 @@ import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IEntityProcessingService;
 import dk.sdu.cbse.shooting.IMissile;
 
-import static java.util.stream.Collectors.toList;
+import java.util.List;
+import java.util.Optional;
+@Component
 public class PlayerControl implements IEntityProcessingService{
 
     private int velocity = 3;
+
+    private List<IMissile> missileImpl;
+    Optional<IMissile> firstMissileImpl;
+
+    @Autowired
+    public PlayerControl(List<IMissile> missileImpl){
+        this.missileImpl = missileImpl;
+        firstMissileImpl = missileImpl.stream().findFirst();
+    }
+
+    public PlayerControl(){
+        
+    }
 
     @Override
     public void process(GameData gameData, World world) {
@@ -41,9 +56,9 @@ public class PlayerControl implements IEntityProcessingService{
                 player.setY(coords[1]+y);
             }
             if(keys.isDown(GameKeys.SPACE)){
-                ServiceLoader.load(IMissile.class).stream().map(ServiceLoader.Provider::get).collect(toList()).stream().findFirst().ifPresent(
-                        spi -> {world.addEntity(spi.createMissile(player,Player.class));}
-                );
+                firstMissileImpl.ifPresent(gun -> {
+                    world.addEntity(gun.createMissile(player,Player.class));
+                });
             }
             if(x>gameData.getDisplayWidth()){
                 player.setX(gameData.getDisplayWidth());

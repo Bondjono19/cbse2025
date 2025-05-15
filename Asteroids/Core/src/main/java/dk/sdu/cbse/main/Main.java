@@ -1,8 +1,7 @@
 package dk.sdu.cbse.main;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
-import java.util.ServiceLoader;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +14,11 @@ import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IEntityProcessingService;
 import dk.sdu.cbse.common.services.IGamePluginService;
 import dk.sdu.cbse.common.services.IPostEntityProcessingService;
+import java.util.ArrayList;
 
-import static java.util.stream.Collectors.toList;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.application.Application;
@@ -31,6 +29,11 @@ import javafx.scene.text.Text;
  * Hello world!
  */
 public class Main extends Application{
+
+    static List<IGamePluginService> plugins;
+    static List<IEntityProcessingService> processingServices;
+    static List<IPostEntityProcessingService> postProcessingServices;
+
     @Autowired
     private static GameData gameData;
     @Autowired
@@ -40,6 +43,9 @@ public class Main extends Application{
 
     private final Pane gameWindow = new Pane();
 
+    public Main(){
+        
+    }
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
@@ -47,6 +53,9 @@ public class Main extends Application{
         context.refresh();
         gameData = context.getBean(GameData.class);
         world = context.getBean(World.class);
+        plugins = new ArrayList<>(context.getBeansOfType(IGamePluginService.class).values());
+        processingServices = new ArrayList<>(context.getBeansOfType(IEntityProcessingService.class).values());
+        postProcessingServices = new ArrayList<>(context.getBeansOfType(IPostEntityProcessingService.class).values());
         launch(Main.class);
     }
 
@@ -93,8 +102,7 @@ public class Main extends Application{
         });
 
 
-        //find all game plugins via the ServiceLoader class
-        for (IGamePluginService plugin : getPluginServices()){
+        for (IGamePluginService plugin : plugins){
             plugin.start(gameData, world);
         }
         //map entities to acutal visible world
@@ -128,10 +136,10 @@ public class Main extends Application{
     
     //call process on all implementations of 'IEntityProcessingService & IPostEntityProcessingService'
     private void update(){
-        for (IEntityProcessingService entityProcessingService : getEntityProcessingServices()){
+        for (IEntityProcessingService entityProcessingService : processingServices){
             entityProcessingService.process(gameData, world);
         }
-        for (IPostEntityProcessingService postEntityProcessingService : getPostEntityProcessingServices()){
+        for (IPostEntityProcessingService postEntityProcessingService : postProcessingServices){
             postEntityProcessingService.process(gameData, world);
         }
     }
@@ -169,16 +177,4 @@ public class Main extends Application{
         }
     }
 
-    //Load all implementations of IGamePluginService
-    private Collection<? extends IGamePluginService> getPluginServices() {
-        return ServiceLoader.load(IGamePluginService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
-    }
-    //Load all implementations of IEntityProcessingService
-    private Collection<? extends IEntityProcessingService> getEntityProcessingServices() {
-        return ServiceLoader.load(IEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
-    }
-    //Load all implementations of IPostEntityProcessingService
-    private Collection<? extends IPostEntityProcessingService> getPostEntityProcessingServices() {
-        return ServiceLoader.load(IPostEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
-    }
 }

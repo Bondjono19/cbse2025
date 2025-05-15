@@ -1,5 +1,7 @@
 package dk.sdu.cbse.asteroidsystem;
 
+import org.springframework.stereotype.Component;
+
 import dk.sdu.cbse.asteroidsystem.Asteroid;
 import dk.sdu.cbse.asteroidsystem.Asteroid.AsteroidSize;
 import dk.sdu.cbse.common.data.Entity;
@@ -7,6 +9,7 @@ import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IEntityProcessingService;
 
+@Component
 public class AsteroidProcessing implements IEntityProcessingService {
 
     @Override
