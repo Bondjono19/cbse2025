@@ -1,7 +1,5 @@
 package dk.sdu.cbse.enemy;
 
-import java.util.ServiceLoader;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,9 +8,7 @@ import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IEntityProcessingService;
 import dk.sdu.cbse.shooting.IMissile;
-import dk.sdu.cbse.shooting.Missile;
 
-import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 import java.util.Optional;
