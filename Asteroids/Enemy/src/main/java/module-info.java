@@ -11,6 +11,7 @@ module Enemy {
     provides IGamePluginService with EnemyPlugin;
     provides IEntityProcessingService with EnemyProcessing;
     uses IMissile;
+    opens dk.sdu.cbse.enemy to spring.core;
     requires spring.context;
     requires spring.beans;
 }
