@@ -5,7 +5,7 @@ import dk.sdu.cbse.common.data.ShipEntity;
 import dk.sdu.cbse.common.data.World;
 
 public class Enemy extends ShipEntity{
-    Enemy(){
+    public Enemy(){
         this.pointValue = 1;
         this.health = 200;
     }
