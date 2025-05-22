@@ -9,15 +9,14 @@ import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.GameKeys;
 import dk.sdu.cbse.common.data.World;
-import dk.sdu.cbse.common.services.IEntityProcessingService;
-import dk.sdu.cbse.common.services.IGamePluginService;
-import dk.sdu.cbse.common.services.IPostEntityProcessingService;
+import dk.sdu.cbse.common.services.IPluginService;
+import dk.sdu.cbse.common.services.IPostProcessingService;
+import dk.sdu.cbse.common.services.IProcessingService;
 
 import static java.util.stream.Collectors.toList;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.application.Application;
@@ -81,7 +80,7 @@ public class Main extends Application{
 
 
         //find all game plugins via the ServiceLoader class
-        for (IGamePluginService plugin : getPluginServices()){
+        for (IPluginService plugin : getPluginServices()){
             plugin.start(gameData, world);
         }
         //map entities to acutal visible world
@@ -103,7 +102,7 @@ public class Main extends Application{
             @Override
             public void handle(long now){
                 gameData.setTime(now);
-                //Trigger all implementationns of interfaces 'IEntityProcessingService & IPostEntityProcessingService' to run their respective implementations of process() method.
+                //Trigger all implementationns of interfaces 'IProcessingService & IPostProcessingService' to run their respective implementations of process() method.
                 update();
                 //Draw the new game board in accordance to the game logic whic has now been processed and updated .
                 draw();
@@ -113,12 +112,12 @@ public class Main extends Application{
         }.start();
     }
     
-    //call process on all implementations of 'IEntityProcessingService & IPostEntityProcessingService'
+    //call process on all implementations of 'IProcessingService & IPostProcessingService'
     private void update(){
-        for (IEntityProcessingService entityProcessingService : getEntityProcessingServices()){
+        for (IProcessingService entityProcessingService : getEntityProcessingServices()){
             entityProcessingService.process(gameData, world);
         }
-        for (IPostEntityProcessingService postEntityProcessingService : getPostEntityProcessingServices()){
+        for (IPostProcessingService postEntityProcessingService : getPostEntityProcessingServices()){
             postEntityProcessingService.process(gameData, world);
         }
     }
@@ -156,16 +155,16 @@ public class Main extends Application{
         }
     }
 
-    //Load all implementations of IGamePluginService
-    private Collection<? extends IGamePluginService> getPluginServices() {
-        return ServiceLoader.load(IGamePluginService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+    //Load all implementations of IPluginService
+    private Collection<? extends IPluginService> getPluginServices() {
+        return ServiceLoader.load(IPluginService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
-    //Load all implementations of IEntityProcessingService
-    private Collection<? extends IEntityProcessingService> getEntityProcessingServices() {
-        return ServiceLoader.load(IEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+    //Load all implementations of IProcessingService
+    private Collection<? extends IProcessingService> getEntityProcessingServices() {
+        return ServiceLoader.load(IProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
-    //Load all implementations of IPostEntityProcessingService
-    private Collection<? extends IPostEntityProcessingService> getPostEntityProcessingServices() {
-        return ServiceLoader.load(IPostEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+    //Load all implementations of IPostProcessingService
+    private Collection<? extends IPostProcessingService> getPostEntityProcessingServices() {
+        return ServiceLoader.load(IPostProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
 }

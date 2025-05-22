@@ -5,13 +5,13 @@ import java.util.ServiceLoader;
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
-import dk.sdu.cbse.common.services.IEntityProcessingService;
+import dk.sdu.cbse.common.services.IProcessingService;
 import dk.sdu.cbse.shooting.IMissile;
 import dk.sdu.cbse.shooting.Missile;
 
 import static java.util.stream.Collectors.toList;
 
-public class EnemyProcessing implements IEntityProcessingService{
+public class EnemyProcessing implements IProcessingService{
 
     @Override
     public void process(GameData gameData, World world) {

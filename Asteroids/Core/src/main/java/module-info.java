@@ -1,12 +1,12 @@
-import dk.sdu.cbse.common.services.IEntityProcessingService;
-import dk.sdu.cbse.common.services.IGamePluginService;
-import dk.sdu.cbse.common.services.IPostEntityProcessingService;
+import dk.sdu.cbse.common.services.IPluginService;
+import dk.sdu.cbse.common.services.IPostProcessingService;
+import dk.sdu.cbse.common.services.IProcessingService;
 
 module Core {
     requires javafx.graphics;
     requires Common;
-    uses IGamePluginService;
-    uses IEntityProcessingService;
-    uses IPostEntityProcessingService;
+    uses IPluginService;
+    uses IProcessingService;
+    uses IPostProcessingService;
     opens dk.sdu.cbse.main to javafx.graphics;
 }

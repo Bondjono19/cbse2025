@@ -9,7 +9,7 @@ import dk.sdu.cbse.common.data.World;
  * 
  */
 
-public interface IGamePluginService {
+public interface IPluginService {
     /**
      * 
      * This method initializes the plugin. Add entities and other necessities. <br>
@@ -26,7 +26,7 @@ public interface IGamePluginService {
      * 
      * This method stops the plugin. Removes entities and other necessities. <br>
      * - Pre-Conditions: <br>
-     * {@code gameData} and {@code world} should be initialized first, they must not be {@code null} and the method {@link IGamePluginService#start(GameData, World)} should have run first. <br>
+     * {@code gameData} and {@code world} should be initialized first, they must not be {@code null} and the method {@link IPluginService#start(GameData, World)} should have run first. <br>
      * - Post-Condtions: <br>
      * All entites that and other things that the plugin has provided the game with, have been removed.
      * @param gameData Global instance of GameData class.
