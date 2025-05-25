@@ -5,7 +5,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.web.client.RestTemplate;
 
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
@@ -14,6 +16,8 @@ import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IEntityProcessingService;
 import dk.sdu.cbse.common.services.IGamePluginService;
 import dk.sdu.cbse.common.services.IPostEntityProcessingService;
+import dk.sdu.cbse.score.Score;
+
 import java.util.ArrayList;
 
 import javafx.scene.layout.Pane;
@@ -33,6 +37,7 @@ public class Main extends Application{
     static List<IGamePluginService> plugins;
     static List<IEntityProcessingService> processingServices;
     static List<IPostEntityProcessingService> postProcessingServices;
+    static RestTemplate restTemplate;
 
     @Autowired
     private static GameData gameData;
@@ -51,6 +56,11 @@ public class Main extends Application{
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.scan("dk.sdu.cbse");
         context.refresh();
+        //define rest template for consuming api
+        restTemplate = new RestTemplate();
+        //launch api server
+        new Thread(() -> SpringApplication.run(Score.class,args)).start();
+        
         gameData = context.getBean(GameData.class);
         world = context.getBean(World.class);
         plugins = new ArrayList<>(context.getBeansOfType(IGamePluginService.class).values());
@@ -167,6 +177,8 @@ public class Main extends Application{
         }
 
         //update score & health
+        String response = restTemplate.getForObject("http://localhost:8081/score", String.class);
+        System.out.println(response);
         Text score = (Text)gameWindow.lookup("#SCORE");
         if(score != null){
             score.setText("Points: " + Integer.toString(world.getPoints()));

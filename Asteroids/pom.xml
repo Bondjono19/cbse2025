@@ -6,7 +6,11 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Asteroids</name>
-
+  <parent>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-parent</artifactId>
+  <version>3.2.7</version> <!-- or any stable Spring Boot version -->
+</parent>
   <properties>
     <java>java</java>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,6 +20,46 @@
 
   <dependencyManagement>
     <dependencies>
+    <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-web</artifactId>
+    <version>6.2.7</version>
+  </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>3.2.7</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>6.2.7</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aop</artifactId>
+      <version>6.2.7</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>6.2.7</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-expression</artifactId>
+      <version>6.2.7</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jcl</artifactId>
+      <version>6.2.7</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>6.2.7</version>
+    </dependency>
       <dependency>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-controls</artifactId>
@@ -32,9 +76,9 @@
         <version>21.0.2</version>
       </dependency>
       <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-context</artifactId>
-        <version>7.0.0-M3</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot</artifactId>
+      <version>3.2.7</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -181,6 +225,17 @@
         <includeScope>runtime</includeScope>
       </configuration>
     </execution>
+    <execution>
+  <id>copy-dependencies</id>
+  <phase>install</phase>
+  <goals>
+    <goal>copy-dependencies</goal>
+  </goals>
+  <configuration>
+    <outputDirectory>../mods</outputDirectory>
+    <includeArtifactIds>jackson-databind,jackson-core,jackson-annotations,javafx-base,javafx-graphics,micrometer-observation,micrometer-core</includeArtifactIds>
+  </configuration>
+</execution>
             </executions>
           </plugin>
         </plugins>
@@ -196,5 +251,6 @@
     <module>Enemy</module>
     <module>Missile</module>
     <module>Asteroid</module>
+    <module>Score</module>
   </modules>
 </project>
