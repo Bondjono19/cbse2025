@@ -2,10 +2,10 @@ package dk.sdu.cbse.player;
 
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
-import dk.sdu.cbse.common.services.IPluginService;
+import dk.sdu.cbse.common.services.IPlugin;
 import dk.sdu.cbse.common.data.Entity;
 
-public class PlayerPlugin implements IPluginService{
+public class PlayerPlugin implements IPlugin{
 
     private Entity player;
 

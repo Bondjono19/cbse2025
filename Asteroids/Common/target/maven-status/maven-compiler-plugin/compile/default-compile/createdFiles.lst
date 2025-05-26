@@ -4,7 +4,8 @@ dk\sdu\cbse\common\data\GameKeys.class
 dk\sdu\cbse\common\data\ShipEntity.class
 dk\sdu\cbse\common\data\BulletEntity.class
 module-info.class
-dk\sdu\cbse\common\services\IPluginService.class
-dk\sdu\cbse\common\services\IPostProcessingService.class
-dk\sdu\cbse\common\services\IProcessingService.class
+dk\sdu\cbse\common\services\IPostProcess.class
+dk\sdu\cbse\common\services\IMissile.class
 dk\sdu\cbse\common\data\World.class
+dk\sdu\cbse\common\services\IPlugin.class
+dk\sdu\cbse\common\services\IProcess.class
