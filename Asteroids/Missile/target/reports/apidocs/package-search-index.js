@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"Missile","l":"dk.sdu.cbse.shooting"}];updateSearchResults();

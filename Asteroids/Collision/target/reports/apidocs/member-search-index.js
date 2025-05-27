@@ -1,1 +1,0 @@
-memberSearchIndex = [{"p":"dk.sdu.cbse.collision","c":"Collision","l":"Collision()","u":"%3Cinit%3E()"},{"p":"dk.sdu.cbse.collision","c":"Collision","l":"process(GameData, World)","u":"process(dk.sdu.cbse.common.data.GameData,dk.sdu.cbse.common.data.World)"}];updateSearchResults();

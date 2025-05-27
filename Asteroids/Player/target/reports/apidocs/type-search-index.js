@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"dk.sdu.cbse.player","l":"Player"},{"p":"dk.sdu.cbse.player","l":"PlayerControl"},{"p":"dk.sdu.cbse.player","l":"PlayerPlugin"}];updateSearchResults();

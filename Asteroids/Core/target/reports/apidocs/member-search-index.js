@@ -1,1 +1,0 @@
-memberSearchIndex = [{"p":"dk.sdu.cbse.main","c":"Main","l":"Main()","u":"%3Cinit%3E()"},{"p":"dk.sdu.cbse.main","c":"Main","l":"main(String[])","u":"main(java.lang.String[])"},{"p":"dk.sdu.cbse.main","c":"Main","l":"start(Stage)","u":"start(javafx.stage.Stage)"}];updateSearchResults();

@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"Common","l":"dk.sdu.cbse.common.data"},{"m":"Common","l":"dk.sdu.cbse.common.services"}];updateSearchResults();
