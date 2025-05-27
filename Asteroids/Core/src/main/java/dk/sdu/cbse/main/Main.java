@@ -196,9 +196,13 @@ public class Main extends Application{
 
     //Load Enemy module into new module layer to resolve split package issue
     private void initModuleLayer(){
+        //Look for jar modules inside plugins directory
         var finder = ModuleFinder.of(Paths.get("plugins/"));
+        //Define parent as the default module layer created at startup
         var parent = ModuleLayer.boot();
+        //Specifically load the Enemy module
         var conf = parent.configuration().resolve(finder, ModuleFinder.of(), Set.of("Enemy"));
+        //initialize the module layer from the private class variable 'layer'.
         this.layer = parent.defineModulesWithOneLoader(conf, ClassLoader.getSystemClassLoader());
     }
 }
