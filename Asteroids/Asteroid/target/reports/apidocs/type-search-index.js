@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"dk.sdu.cbse.asteroidsystem","l":"Asteroid"},{"p":"dk.sdu.cbse.asteroidsystem","l":"AsteroidPlugin"},{"p":"dk.sdu.cbse.asteroidsystem","l":"AsteroidProcessing"},{"p":"dk.sdu.cbse.asteroidsystem","l":"Asteroid.AsteroidSize"}];updateSearchResults();

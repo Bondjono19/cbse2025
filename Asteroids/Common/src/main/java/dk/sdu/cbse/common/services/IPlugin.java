@@ -13,13 +13,24 @@ public interface IPlugin {
     /**
      * 
      * This method initializes the plugin. Add entities and other necessities. <br>
-     * - Pre-Conditions: <br>
+     * <b>Preconditions</b>
+     * <ul>
+     * <li>
      * {@code gameData} and {@code world} should be initialized first, that is, they must not be {@code null}. More formally:
+     * </li>
+     * <li>
      * {@code gameData} !=null
+     * </li>
+     * <li>
      * {@code world} != null
-     * <br>
-     * - Post-Condtions: <br>
+     * </li>
+     * </ul>
+     * <b>Postconditions</b>
+     * <ul>
+     * <li>
      * All entities that appear at start of game must have been added to world.
+     * </li>
+     * </ul>
      * @param gameData Global instance of GameData class.
      * @param world Global instance of World class.
      */ 

@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"dk.sdu.cbse.enemy","l":"Enemy"},{"p":"dk.sdu.cbse.enemy","l":"EnemyPlugin"},{"p":"dk.sdu.cbse.enemy","l":"EnemyProcessing"}];updateSearchResults();

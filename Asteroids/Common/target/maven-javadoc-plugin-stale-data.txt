@@ -1,0 +1,55 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+@argfile
+--module-path
+'C:/Users/Marius-PC/Desktop/cbse2025/cbse2025/Asteroids/Common/target/classes'
+--patch-module
+Common='C:/Users/Marius-PC/Desktop/cbse2025/cbse2025/Asteroids/Common/src/main/java'
+-encoding
+'UTF-8'
+-protected
+--release
+17
+--module-source-path
+'C:/Users/Marius-PC/Desktop/cbse2025/cbse2025/Asteroids/Common/target/reports/apidocs/src'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/Marius-PC/Desktop/cbse2025/cbse2025/Asteroids/Common/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Common 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'Common 1.0-SNAPSHOT API'
+dk.sdu.cbse.common.data
+dk.sdu.cbse.common.services
+'C:/Users/Marius-PC/Desktop/cbse2025/cbse2025/Asteroids/Common/src/main/java/module-info.java'
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\allclasses-index.html = 1748272199101
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\allpackages-index.html = 1748272199104
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\constant-values.html = 1748272199012
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\copy.svg = 1748272199141
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\element-list = 1748272198975
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\help-doc.html = 1748272199135
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\index-all.html = 1748272199125
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\index.html = 1748272199131
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\link.svg = 1748272199143
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\member-search-index.js = 1748272199109
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\module-search-index.js = 1748272199105
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\overview-tree.html = 1748272199081
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\package-search-index.js = 1748272199106
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\script.js = 1748272199139
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\search-page.js = 1748272199147
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\search.html = 1748272199129
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\search.js = 1748272199146
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\serialized-form.html = 1748272199023
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\stylesheet.css = 1748272199137
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\tag-search-index.js = 1748272199110
+C:\Users\Marius-PC\Desktop\cbse2025\cbse2025\Asteroids\Common\target\reports\apidocs\type-search-index.js = 1748272199108

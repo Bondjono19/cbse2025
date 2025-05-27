@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"Core","l":"dk.sdu.cbse.main"}];updateSearchResults();
