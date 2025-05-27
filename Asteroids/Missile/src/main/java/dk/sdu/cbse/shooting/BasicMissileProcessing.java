@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
-import dk.sdu.cbse.common.services.IEntityProcessingService;
+import dk.sdu.cbse.common.services.IProcess;
 
 @Component
-public class BasicMissileProcessing implements IMissile,IEntityProcessingService{
+public class BasicMissileProcessing implements IMissile,IProcess{
 
     @Override
     public Entity createMissile(Entity shooter,Class<?> origin) {

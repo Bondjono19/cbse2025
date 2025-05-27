@@ -5,13 +5,13 @@ import org.springframework.stereotype.Component;
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
-import dk.sdu.cbse.common.services.IGamePluginService;
+import dk.sdu.cbse.common.services.IPlugin;
 
 /**
  * Hello world!
  */
 @Component
-public class EnemyPlugin implements IGamePluginService{
+public class EnemyPlugin implements IPlugin{
 
     public EnemyPlugin(){}
 

@@ -2,14 +2,14 @@ package dk.sdu.cbse.player;
 
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
-import dk.sdu.cbse.common.services.IGamePluginService;
+import dk.sdu.cbse.common.services.IPlugin;
 
 import org.springframework.stereotype.Component;
 
 import dk.sdu.cbse.common.data.Entity;
 
 @Component
-public class PlayerPlugin implements IGamePluginService{
+public class PlayerPlugin implements IPlugin{
 
     private Entity player;
 
