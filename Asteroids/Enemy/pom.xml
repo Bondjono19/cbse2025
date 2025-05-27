@@ -62,6 +62,27 @@
   </dependencies>
 
   <build>
+    <plugins>
+      <plugin>
+      <artifactId>maven-antrun-plugin</artifactId>
+      <version>3.1.0</version>
+      <executions>
+        <execution>
+          <id>copy-jar</id>
+          <phase>package</phase>
+          <configuration>
+            <target>
+              <copy file="${project.build.directory}/${project.build.finalName}.jar"
+                    todir="${project.basedir}/../plugins" />
+            </target>
+          </configuration>
+          <goals>
+            <goal>run</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+    </plugins>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->

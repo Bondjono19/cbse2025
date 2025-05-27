@@ -7,11 +7,11 @@ import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.GameKeys;
 import dk.sdu.cbse.common.data.World;
-import dk.sdu.cbse.common.services.IEntityProcessingService;
-import dk.sdu.cbse.shooting.IMissile;
+import dk.sdu.cbse.common.services.IMissile;
+import dk.sdu.cbse.common.services.IProcess;
 
 import static java.util.stream.Collectors.toList;
-public class PlayerControl implements IEntityProcessingService{
+public class PlayerControl implements IProcess{
 
     private int velocity = 3;
 

@@ -2,9 +2,8 @@ package dk.sdu.cbse;
 
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
-import dk.sdu.cbse.common.services.IGamePluginService;
-
-public class HelloOnBoot implements IGamePluginService{
+import dk.sdu.cbse.common.services.IPlugin;
+public class HelloOnBoot implements IPlugin{
 
     @Override
     public void start(GameData gameData, World world) {
