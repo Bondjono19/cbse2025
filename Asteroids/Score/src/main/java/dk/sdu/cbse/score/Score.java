@@ -28,7 +28,7 @@ public class Score {
     @PutMapping("/score/increase")
     public int addPoints(@RequestBody Map<String, Integer> body) {
     int points = body.get("points");
-    System.out.println(points);
+
     this.score += points;
     return score;
 

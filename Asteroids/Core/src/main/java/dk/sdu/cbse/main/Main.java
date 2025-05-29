@@ -194,7 +194,7 @@ public class Main extends Application{
             HttpResponse<String> res = client.send(getScore,HttpResponse.BodyHandlers.ofString());
             if(score != null){
                 score.setText("Points: " + res.body());
-                System.out.println(res.body());
+
             }
         } catch (Exception e) {
             throw new RuntimeException("error fetching score");

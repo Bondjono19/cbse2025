@@ -31,7 +31,6 @@ public class HttpUtil {
         .build();
         try {
             res = client.send(req,HttpResponse.BodyHandlers.ofString());
-            System.out.println("sennt");
         } catch (Exception e) {
             throw new RuntimeException("error updating points");
         }
