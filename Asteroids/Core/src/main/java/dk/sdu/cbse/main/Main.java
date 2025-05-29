@@ -9,9 +9,9 @@ import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.GameKeys;
 import dk.sdu.cbse.common.data.World;
-import dk.sdu.cbse.common.services.IPlugin;
-import dk.sdu.cbse.common.services.IPostProcess;
-import dk.sdu.cbse.common.services.IProcess;
+import dk.sdu.cbse.common.services.IGamePluginService;
+import dk.sdu.cbse.common.services.IPostEntityProcessingService;
+import dk.sdu.cbse.common.services.IEntityProcessingService;
 
 import static java.util.stream.Collectors.toList;
 import javafx.scene.layout.Pane;
@@ -80,7 +80,7 @@ public class Main extends Application{
 
 
         //find all game plugins via the ServiceLoader class
-        for (IPlugin plugin : getPlugins()){
+        for (IGamePluginService plugin : getPlugins()){
             plugin.start(gameData, world);
         }
         //map entities to acutal visible world
@@ -102,7 +102,7 @@ public class Main extends Application{
             @Override
             public void handle(long now){
                 gameData.setTime(now);
-                //Trigger all implementationns of interfaces 'IProcess & IPostProcess' to run their respective implementations of process() method.
+                //Trigger all implementationns of interfaces 'IEntityProcessingService & IPostEntityProcessingService' to run their respective implementations of process() method.
                 update();
                 //Draw the new game board in accordance to the game logic whic has now been processed and updated .
                 draw();
@@ -112,12 +112,12 @@ public class Main extends Application{
         }.start();
     }
     
-    //call process on all implementations of 'IProcess & IPostProcess'
+    //call process on all implementations of 'IEntityProcessingService & IPostEntityProcessingService'
     private void update(){
-        for (IProcess process : getProcesses()){
+        for (IEntityProcessingService process : getProcesses()){
             process.process(gameData, world);
         }
-        for (IPostProcess postProcess : getPostProcesses()){
+        for (IPostEntityProcessingService postProcess : getPostProcesses()){
             postProcess.process(gameData, world);
         }
     }
@@ -155,16 +155,16 @@ public class Main extends Application{
         }
     }
 
-    //Load all implementations of IPlugin
-    private Collection<? extends IPlugin> getPlugins() {
-        return ServiceLoader.load(IPlugin.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+    //Load all implementations of IGamePluginService
+    private Collection<? extends IGamePluginService> getPlugins() {
+        return ServiceLoader.load(IGamePluginService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
-    //Load all implementations of IProcess
-    private Collection<? extends IProcess> getProcesses() {
-        return ServiceLoader.load(IProcess.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+    //Load all implementations of IEntityProcessingService
+    private Collection<? extends IEntityProcessingService> getProcesses() {
+        return ServiceLoader.load(IEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
-    //Load all implementations of IPostProcess
-    private Collection<? extends IPostProcess> getPostProcesses() {
-        return ServiceLoader.load(IPostProcess.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+    //Load all implementations of IPostEntityProcessingService
+    private Collection<? extends IPostEntityProcessingService> getPostProcesses() {
+        return ServiceLoader.load(IPostEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
 }

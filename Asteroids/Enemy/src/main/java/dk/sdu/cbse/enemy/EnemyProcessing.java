@@ -6,11 +6,11 @@ import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IMissile;
-import dk.sdu.cbse.common.services.IProcess;
+import dk.sdu.cbse.common.services.IEntityProcessingService;
 
 import static java.util.stream.Collectors.toList;
 
-public class EnemyProcessing implements IProcess{
+public class EnemyProcessing implements IEntityProcessingService{
 
     @Override
     public void process(GameData gameData, World world) {
