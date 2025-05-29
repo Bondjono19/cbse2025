@@ -1,11 +1,11 @@
 import dk.sdu.cbse.HelloOnBoot;
 import dk.sdu.cbse.asteroidsystem.AsteroidPlugin;
 import dk.sdu.cbse.asteroidsystem.AsteroidProcessing;
-import dk.sdu.cbse.common.services.IPlugin;
-import dk.sdu.cbse.common.services.IProcess;
+import dk.sdu.cbse.common.services.IGamePluginService;
+import dk.sdu.cbse.common.services.IEntityProcessingService;
 
 module Asteroid {
     requires Common;
-    provides IPlugin with AsteroidPlugin,HelloOnBoot;
-    provides IProcess with AsteroidProcessing;
+    provides IGamePluginService with AsteroidPlugin,HelloOnBoot;
+    provides IEntityProcessingService with AsteroidProcessing;
 }

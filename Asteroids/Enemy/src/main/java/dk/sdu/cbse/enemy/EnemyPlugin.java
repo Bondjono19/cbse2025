@@ -3,12 +3,12 @@ package dk.sdu.cbse.enemy;
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
-import dk.sdu.cbse.common.services.IPlugin;
+import dk.sdu.cbse.common.services.IGamePluginService;
 
 /**
  * Hello world!
  */
-public class EnemyPlugin implements IPlugin{
+public class EnemyPlugin implements IGamePluginService{
 
     @Override
     public void start(GameData gameData, World world) {

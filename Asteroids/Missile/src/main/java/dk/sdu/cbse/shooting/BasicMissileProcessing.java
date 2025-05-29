@@ -4,9 +4,9 @@ import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IMissile;
-import dk.sdu.cbse.common.services.IProcess;
+import dk.sdu.cbse.common.services.IEntityProcessingService;
 
-public class BasicMissileProcessing implements IMissile,IProcess{
+public class BasicMissileProcessing implements IMissile,IEntityProcessingService{
 
     @Override
     public Entity createMissile(Entity shooter,Class<?> origin) {

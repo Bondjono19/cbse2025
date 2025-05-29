@@ -3,8 +3,8 @@ import dk.sdu.cbse.asteroidsystem.Asteroid.AsteroidSize;
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
-import dk.sdu.cbse.common.services.IProcess;
-public class AsteroidProcessing implements IProcess {
+import dk.sdu.cbse.common.services.IEntityProcessingService;
+public class AsteroidProcessing implements IEntityProcessingService {
 
     @Override
     public void process(GameData gameData, World world) {

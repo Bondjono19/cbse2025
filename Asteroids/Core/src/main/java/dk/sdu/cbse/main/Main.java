@@ -12,9 +12,9 @@ import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.GameKeys;
 import dk.sdu.cbse.common.data.World;
-import dk.sdu.cbse.common.services.IPlugin;
-import dk.sdu.cbse.common.services.IPostProcess;
-import dk.sdu.cbse.common.services.IProcess;
+import dk.sdu.cbse.common.services.IGamePluginService;
+import dk.sdu.cbse.common.services.IPostEntityProcessingService;
+import dk.sdu.cbse.common.services.IEntityProcessingService;
 
 import static java.util.stream.Collectors.toList;
 
@@ -92,7 +92,7 @@ public class Main extends Application{
         initModuleLayer();
 
         //find all game plugins via the ServiceLoader class
-        for (IPlugin plugin : getPlugins()){
+        for (IGamePluginService plugin : getPlugins()){
             plugin.start(gameData, world);
         }
         //map entities to acutal visible world
@@ -113,7 +113,7 @@ public class Main extends Application{
             @Override
             public void handle(long now){
                 gameData.setTime(now);
-                //Trigger all implementationns of interfaces 'IProcess & IPostProcess' to run their respective implementations of process() method.
+                //Trigger all implementationns of interfaces 'IEntityProcessingService & IPostEntityProcessingService' to run their respective implementations of process() method.
                 update();
                 //Draw the new game board in accordance to the game logic whic has now been processed and updated .
                 draw();
@@ -123,13 +123,13 @@ public class Main extends Application{
         }.start();
     }
     
-    //call process on all implementations of 'IProcess & IPostProces'
+    //call process on all implementations of 'IEntityProcessingService & IPostProces'
     private void update(){
-        for (IProcess entityProcessingService : getProcesses()){
+        for (IEntityProcessingService entityProcessingService : getProcesses()){
             
             entityProcessingService.process(gameData, world);
         }
-        for (IPostProcess postEntityProcessingService : getPostProcesses()){
+        for (IPostEntityProcessingService postEntityProcessingService : getPostProcesses()){
             postEntityProcessingService.process(gameData, world);
         }
     }
@@ -167,31 +167,31 @@ public class Main extends Application{
         }
     }
 
-    //Load all implementations of IPlugin
-    private Collection<? extends IPlugin> getPlugins() {
+    //Load all implementations of IGamePluginService
+    private Collection<? extends IGamePluginService> getPlugins() {
 
-        List<IPlugin> allServices = new ArrayList<>();
+        List<IGamePluginService> allServices = new ArrayList<>();
 
-        ServiceLoader.load(IPlugin.class).forEach(allServices::add);
+        ServiceLoader.load(IGamePluginService.class).forEach(allServices::add);
 
-        ServiceLoader.load(layer,IPlugin.class).forEach(allServices::add);
-
-        return allServices;
-    }
-    //Load all implementations of IProcess
-    private Collection<? extends IProcess> getProcesses() {
-
-        List<IProcess> allServices = new ArrayList<>();
-
-        ServiceLoader.load(IProcess.class).forEach(allServices::add);
-
-        ServiceLoader.load(layer,IProcess.class).forEach(allServices::add);
+        ServiceLoader.load(layer,IGamePluginService.class).forEach(allServices::add);
 
         return allServices;
     }
-    //Load all implementations of IPostProcess
-    private Collection<? extends IPostProcess> getPostProcesses() {
-        return ServiceLoader.load(IPostProcess.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+    //Load all implementations of IEntityProcessingService
+    private Collection<? extends IEntityProcessingService> getProcesses() {
+
+        List<IEntityProcessingService> allServices = new ArrayList<>();
+
+        ServiceLoader.load(IEntityProcessingService.class).forEach(allServices::add);
+
+        ServiceLoader.load(layer,IEntityProcessingService.class).forEach(allServices::add);
+
+        return allServices;
+    }
+    //Load all implementations of IPostEntityProcessingService
+    private Collection<? extends IPostEntityProcessingService> getPostProcesses() {
+        return ServiceLoader.load(IPostEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
 
     //Load Enemy module into new module layer to resolve split package issue

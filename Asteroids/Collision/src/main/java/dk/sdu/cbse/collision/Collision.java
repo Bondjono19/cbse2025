@@ -5,7 +5,7 @@ import java.util.ServiceLoader;
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
-import dk.sdu.cbse.common.services.IPostProcess;
+import dk.sdu.cbse.common.services.IPostEntityProcessingService;
 
 import static java.util.stream.Collectors.toList;
 
@@ -14,7 +14,7 @@ import java.util.Collection;
 /**
  * Hello world!
  */
-public class Collision implements IPostProcess {
+public class Collision implements IPostEntityProcessingService {
 
     @Override
     public void process(GameData gameData, World world) {
