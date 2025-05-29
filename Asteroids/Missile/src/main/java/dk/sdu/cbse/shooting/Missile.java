@@ -2,6 +2,7 @@ package dk.sdu.cbse.shooting;
 
 import dk.sdu.cbse.common.data.BulletEntity;
 import dk.sdu.cbse.common.data.Entity;
+import dk.sdu.cbse.common.data.HttpUtil;
 import dk.sdu.cbse.common.data.ShipEntity;
 import dk.sdu.cbse.common.data.World;
 /**

@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,8 +15,11 @@ import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IEntityProcessingService;
 import dk.sdu.cbse.common.services.IGamePluginService;
 import dk.sdu.cbse.common.services.IPostEntityProcessingService;
-import dk.sdu.cbse.score.Score;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 
 import javafx.scene.layout.Pane;
@@ -37,12 +39,13 @@ public class Main extends Application{
     static List<IGamePluginService> plugins;
     static List<IEntityProcessingService> processingServices;
     static List<IPostEntityProcessingService> postProcessingServices;
-    static RestTemplate restTemplate;
 
     @Autowired
-    private static GameData gameData;
-    @Autowired
-    private static World world;
+    private GameData gameData = new GameData();
+
+    private World world = new World();
+
+    private HttpClient client = HttpClient.newHttpClient();
 
     private final Map<Entity,Polygon> polygons = new ConcurrentHashMap<>();
 
@@ -53,24 +56,23 @@ public class Main extends Application{
     }
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-        context.scan("dk.sdu.cbse");
-        context.refresh();
-        //define rest template for consuming api
-        restTemplate = new RestTemplate();
-        //launch api server
-        new Thread(() -> SpringApplication.run(Score.class,args)).start();
-        
-        gameData = context.getBean(GameData.class);
-        world = context.getBean(World.class);
-        plugins = new ArrayList<>(context.getBeansOfType(IGamePluginService.class).values());
-        processingServices = new ArrayList<>(context.getBeansOfType(IEntityProcessingService.class).values());
-        postProcessingServices = new ArrayList<>(context.getBeansOfType(IPostEntityProcessingService.class).values());
         launch(Main.class);
     }
 
     @Override
     public void start(Stage window) throws Exception {
+
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+
+        context.scan("dk.sdu.cbse");
+        context.refresh();
+
+        gameData = context.getBean(GameData.class);
+        world = context.getBean(World.class);
+        plugins = new ArrayList<>(context.getBeansOfType(IGamePluginService.class).values());
+        processingServices = new ArrayList<>(context.getBeansOfType(IEntityProcessingService.class).values());
+        postProcessingServices = new ArrayList<>(context.getBeansOfType(IPostEntityProcessingService.class).values());
+
         Text text = new Text(20,20,"Asteroids Destroyed:");
         text.setId("SCORE");
         Text text2 = new Text(20,20,"Health:");
@@ -121,6 +123,9 @@ public class Main extends Application{
             polygons.put(entity,polygon);
             gameWindow.getChildren().add(polygon);
         }
+
+
+
         render();
         window.setScene(scene);
         window.setTitle("Marius Asteroids Game");
@@ -177,13 +182,23 @@ public class Main extends Application{
         }
 
         //update score & health
-        String response = restTemplate.getForObject("http://localhost:8081/score", String.class);
-        System.out.println(response);
+        //find UI score element
         Text score = (Text)gameWindow.lookup("#SCORE");
-        if(score != null){
-            score.setText("Points: " + Integer.toString(world.getPoints()));
-        }
+
+        //find UI health element
         Text health = (Text)gameWindow.lookup("#HEALTH");
+
+        //build new httprequest obj
+        HttpRequest getScore = HttpRequest.newBuilder().uri(URI.create("http://localhost:8081/score")).GET().build();
+        try {
+            HttpResponse<String> res = client.send(getScore,HttpResponse.BodyHandlers.ofString());
+            if(score != null){
+                score.setText("Points: " + res.body());
+                System.out.println(res.body());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("error fetching score");
+        }
         if(health != null){
             health.setText("Health: " + Double.toString(world.getPlayerHealth()));
         }

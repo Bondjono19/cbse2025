@@ -12,9 +12,9 @@ module Core {
     requires spring.beans;
     requires spring.web;
     requires spring.boot;
-    requires Score;
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.annotation;
-    opens dk.sdu.cbse.main to javafx.graphics;
+    requires java.net.http;
+    opens dk.sdu.cbse.main to javafx.graphics,spring.core,spring.beans,spring.context,spring.web,spring.boot;
 }

@@ -6,6 +6,7 @@ import dk.sdu.cbse.asteroidsystem.Asteroid;
 import dk.sdu.cbse.asteroidsystem.Asteroid.AsteroidSize;
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
+import dk.sdu.cbse.common.data.HttpUtil;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IEntityProcessingService;
 
@@ -53,6 +54,7 @@ public class AsteroidProcessing implements IEntityProcessingService {
             }
             if(e.getHealth()<=0){
                 world.removeEntity(e);
+                HttpUtil.increasePointsHTTP(1);
             }
             double[] coords = move(1,e.getRotation());
             e.setX(e.getX() +coords[0]);

@@ -1,8 +1,11 @@
 package dk.sdu.cbse.enemy;
 
+import java.net.URI;
+
 import org.springframework.stereotype.Component;
 
 import dk.sdu.cbse.common.data.Entity;
+import dk.sdu.cbse.common.data.HttpUtil;
 import dk.sdu.cbse.common.data.ShipEntity;
 import dk.sdu.cbse.common.data.World;
 

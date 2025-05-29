@@ -37,7 +37,7 @@
   <dependency>
     <groupId>io.micrometer</groupId>
     <artifactId>micrometer-core</artifactId>
-    <version>1.12.7</version> <!-- match Spring Boot 3.2.7 compatible version -->
+    <version>1.12.7</version> <!-- or the latest compatible version -->
 </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
