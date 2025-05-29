@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
-import dk.sdu.cbse.common.services.IProcess;
+import dk.sdu.cbse.common.services.IEntityProcessingService;
 import dk.sdu.cbse.shooting.IMissile;
 
 
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class EnemyProcessing implements IProcess{
+public class EnemyProcessing implements IEntityProcessingService{
 
     
     private List<IMissile> missileImpl;

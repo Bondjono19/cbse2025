@@ -1,12 +1,12 @@
 import dk.sdu.cbse.asteroidsystem.AsteroidPlugin;
 import dk.sdu.cbse.asteroidsystem.AsteroidProcessing;
-import dk.sdu.cbse.common.services.IPlugin;
-import dk.sdu.cbse.common.services.IProcess;
+import dk.sdu.cbse.common.services.IGamePluginService;
+import dk.sdu.cbse.common.services.IEntityProcessingService;
 
 module Asteroid {
     requires Common;
     requires spring.context;
-    provides IPlugin with AsteroidPlugin;
-    provides IProcess with AsteroidProcessing;
+    provides IGamePluginService with AsteroidPlugin;
+    provides IEntityProcessingService with AsteroidProcessing;
     exports dk.sdu.cbse.asteroidsystem;
 }

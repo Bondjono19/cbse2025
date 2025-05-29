@@ -11,9 +11,9 @@ import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.GameKeys;
 import dk.sdu.cbse.common.data.World;
-import dk.sdu.cbse.common.services.IPlugin;
-import dk.sdu.cbse.common.services.IPostProcess;
-import dk.sdu.cbse.common.services.IProcess;
+import dk.sdu.cbse.common.services.IGamePluginService;
+import dk.sdu.cbse.common.services.IPostEntityProcessingService;
+import dk.sdu.cbse.common.services.IEntityProcessingService;
 
 import java.util.ArrayList;
 
@@ -31,9 +31,9 @@ import javafx.scene.text.Text;
  */
 public class Main extends Application{
 
-    static List<IPlugin> plugins;
-    static List<IProcess> processes;
-    static List<IPostProcess> postProcesses;
+    static List<IGamePluginService> plugins;
+    static List<IEntityProcessingService> processes;
+    static List<IPostEntityProcessingService> postProcesses;
 
     @Autowired
     private static GameData gameData;
@@ -54,9 +54,9 @@ public class Main extends Application{
         context.refresh();
         gameData = context.getBean(GameData.class);
         world = context.getBean(World.class);
-        plugins = new ArrayList<>(context.getBeansOfType(IPlugin.class).values());
-        processes = new ArrayList<>(context.getBeansOfType(IProcess.class).values());
-        postProcesses = new ArrayList<>(context.getBeansOfType(IPostProcess.class).values());
+        plugins = new ArrayList<>(context.getBeansOfType(IGamePluginService.class).values());
+        processes = new ArrayList<>(context.getBeansOfType(IEntityProcessingService.class).values());
+        postProcesses = new ArrayList<>(context.getBeansOfType(IPostEntityProcessingService.class).values());
         launch(Main.class);
     }
 
@@ -103,7 +103,7 @@ public class Main extends Application{
         });
 
 
-        for (IPlugin plugin : plugins){
+        for (IGamePluginService plugin : plugins){
             plugin.start(gameData, world);
         }
         //map entities to acutal visible world
@@ -125,7 +125,7 @@ public class Main extends Application{
             @Override
             public void handle(long now){
                 gameData.setTime(now);
-                //Trigger all implementationns of interfaces 'IProcess & IPostProcess' to run their respective implementations of process() method.
+                //Trigger all implementationns of interfaces 'IEntityProcessingService & IPostEntityProcessingService' to run their respective implementations of process() method.
                 update();
                 //Draw the new game board in accordance to the game logic whic has now been processed and updated .
                 draw();
@@ -135,12 +135,12 @@ public class Main extends Application{
         }.start();
     }
     
-    //call process on all implementations of 'IProcess & IPostProcess'
+    //call process on all implementations of 'IEntityProcessingService & IPostEntityProcessingService'
     private void update(){
-        for (IProcess entityProcessingService : processes){
+        for (IEntityProcessingService entityProcessingService : processes){
             entityProcessingService.process(gameData, world);
         }
-        for (IPostProcess postEntityProcessingService : postProcesses){
+        for (IPostEntityProcessingService postEntityProcessingService : postProcesses){
             postEntityProcessingService.process(gameData, world);
         }
     }

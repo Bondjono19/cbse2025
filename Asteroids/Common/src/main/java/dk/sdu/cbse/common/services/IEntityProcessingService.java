@@ -7,13 +7,13 @@ import dk.sdu.cbse.common.data.World;
  * Interface for processing each plugin.
  */
 
-public interface IProcess {
+public interface IEntityProcessingService {
     /**
      *  The method runs once every frame, and is to process the plugin and its entities as the time progresses in the game. <br>
      *  <b>Preconditions</b>
      * <ul>
      * <li>
-     *  The method {@link IPlugin#start(GameData, World)} should have run once prior to this method, 
+     *  The method {@link IGamePluginService#start(GameData, World)} should have run once prior to this method, 
      *  to ensure that entites, if any, have been loaded into the game prior to this method's execution. </li>
      * <li>
      *  {@code gameData} is not {@code null}.
