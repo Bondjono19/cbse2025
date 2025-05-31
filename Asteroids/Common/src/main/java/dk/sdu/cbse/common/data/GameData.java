@@ -4,7 +4,7 @@ import java.util.Objects;
 public class GameData {
     private int displayWidth = 800;
     private int displayHeight = 800;
-    private final GameKeys keys = new GameKeys();
+    private GameKeys keys = new GameKeys();
     private long time;
 
     public long getTime() {
@@ -33,6 +33,10 @@ public class GameData {
 
     public GameKeys getKeys() {
         return this.keys;
+    }
+
+    public void setKeys(GameKeys keys){
+        this.keys = keys;
     }
 
 }

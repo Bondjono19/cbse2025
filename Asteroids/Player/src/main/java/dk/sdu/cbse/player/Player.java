@@ -6,7 +6,7 @@ import dk.sdu.cbse.common.data.World;
 
 public class Player extends ShipEntity{
 
-    Player(){
+    public Player(){
         this.health = 500;
     }
 

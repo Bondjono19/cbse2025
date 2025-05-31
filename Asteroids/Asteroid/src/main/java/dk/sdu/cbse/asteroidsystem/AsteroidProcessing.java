@@ -49,6 +49,8 @@ public class AsteroidProcessing implements IEntityProcessingService {
                 world.removeEntity(e);
             }
             if(e.getHealth()<=0){
+                //award player 1 points for killingg asteroid
+                world.setPoints(world.getPoints()+1);
                 world.removeEntity(e);
             }
             double[] coords = move(1,e.getRotation());

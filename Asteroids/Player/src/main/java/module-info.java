@@ -4,6 +4,7 @@ import dk.sdu.cbse.common.services.IGamePluginService;
 
 module Player {
     requires Common;
+    requires Missile;
     provides IGamePluginService with dk.sdu.cbse.player.PlayerPlugin;
     provides IEntityProcessingService with dk.sdu.cbse.player.PlayerControl;
     uses IMissile;
